@@ -101,8 +101,10 @@ with col_lease_pl:
     st.write(f'LEASE REVENUE: {ann_rev}')
     st.write(f'LEASE EXPENSES: {annual_lease_cost}')
     st.write(f'LEASE PROFIT/(LOSS): {lease_profit}')
-    st.write(f'Taxable Income (100%): {lease_profit}')
-    st.write(f'Taxes (25%): {lease_profit * 0.25}')
+    lease_taxable_income = 0 if lease_profit < 0 else lease_profit * 0.60
+    lease_taxes = 0 if lease_taxable_income <= 0 else lease_taxable_income * 0.25
+    st.write(f'Taxable Income (100%): {lease_taxable_income}')
+    st.write(f'Taxes (25%): {lease_taxes}')
 
 with col_buy_pl:
     st.subheader('BUY:')
@@ -113,8 +115,10 @@ with col_buy_pl:
     st.write(f'BUY REVENUE: {ann_rev}')
     st.write(f'BUY EXPENSES: {annual_buy_cost}')
     st.write(f'BUY PROFIT/(LOSS): {buy_profit}')
-    st.write(f'Taxable Income (60%): {buy_profit * 0.60}')
-    st.write(f'Taxes (25%): {buy_profit * 0.60 * 0.25}')
+    taxable_income = 0 if buy_profit < 0 else buy_profit * 0.60
+    taxes = 0 if taxable_income <= 0 else taxable_income * 0.25
+    st.write(f'Taxable Income (60%): {taxable_income}')
+    st.write(f'Taxes (25%): {taxes}')
 
 
 if buy_profit > lease_profit:
